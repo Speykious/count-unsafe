@@ -2,7 +2,6 @@
 
 mod count;
 
-use std::io::{self, BufWriter};
 use std::path::PathBuf;
 
 use clap::Parser;
@@ -19,8 +18,18 @@ fn main() -> anyhow::Result<()> {
 
     let counters = count::find_unsafe_recursively(&args.path)?;
 
-    let stdout = BufWriter::new(io::stdout().lock());
-    serde_json::to_writer_pretty(stdout, &counters)?;
+    println!("{:<12} | {:^6} | {:^6}", "", "Safe", "Unsafe");
+    println!("{:-<12} | {:-^6} | {:-^6}", "", "", "");
+
+    for (name, counter) in [
+        ("Functions", counters.functions),
+        ("Expressions", counters.exprs),
+        ("Item impls", counters.item_impls),
+        ("Item traits", counters.item_traits),
+        ("Methods", counters.methods),
+    ] {
+        println!("{:<12} | {:^6} | {:^6}", name, counter.safe, counter.unsafe_);
+    }
 
     Ok(())
 }

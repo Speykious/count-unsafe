@@ -1,7 +1,7 @@
 # count-unsafe
 
-[![Crates.io](https://img.shields.io/crates/v/count-unsafe)](https://crates.io/crates/count-unsafe)
-[![CI](https://github.com/mkroening/count-unsafe/actions/workflows/ci.yml/badge.svg)](https://github.com/mkroening/count-unsafe/actions/workflows/ci.yml)
+> This is a fork of [`count-unsafe`](https://github.com/mkroening/count-unsafe).
+> It wasn't up-to-date enough with stable Rust features and I changed the way it prints.
 
 Count-unsafe counts the amount of unsafe Rust code in a given path.
 
@@ -23,34 +23,15 @@ cargo install count-unsafe
 
 ## Example
 
-Running count-unsafe on Cargo's source ([0.69.0]):
-
-[0.69.0]: https://github.com/rust-lang/cargo/tree/0.69.0
-
 ```console
-$ count-unsafe cargo/src
-{
-  "functions": {
-    "safe": 759,
-    "unsafe_": 2
-  },
-  "exprs": {
-    "safe": 50434,
-    "unsafe_": 238
-  },
-  "item_impls": {
-    "safe": 549,
-    "unsafe_": 0
-  },
-  "item_traits": {
-    "safe": 16,
-    "unsafe_": 0
-  },
-  "methods": {
-    "safe": 1804,
-    "unsafe_": 0
-  }
-}
+$ count-unsafe src
+             |  Safe  | Unsafe
+------------ | ------ | ------
+Functions    |  189   |   30  
+Expressions  | 12750  |  2393 
+Item impls   |   98   |   13  
+Item traits  |   5    |   1   
+Methods      |  451   |   16 
 ```
 
 ## License
